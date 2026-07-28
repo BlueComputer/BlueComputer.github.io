@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Computer</title>
+<meta name="description" content="Blue Computer — original songs, tutorials, and writing from three no-face personas: Blue, Dawn, and Fable.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand"><span class="dot"></span>BLUE COMPUTER</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="songs.html">Songs</a>
+      <a href="tutorials.html">Tutorials</a>
+      <a href="blog.html">Blog</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">// no face, three channels</p>
+    <h1 class="display">Three voices.<br>One <em>signal</em>.</h1>
+    <p class="lede">Blue Computer is a no-face music project built around three personas — Blue, Dawn, and Fable — plus the tutorials and writing behind how it gets made.</p>
+    <div class="persona-select" id="home-persona-select">
+      <button class="persona-btn is-active" data-persona="all"><span class="led"></span>All</button>
+      <button class="persona-btn" data-persona="blue"><span class="led"></span>Blue</button>
+      <button class="persona-btn" data-persona="dawn"><span class="led"></span>Dawn</button>
+      <button class="persona-btn" data-persona="fable"><span class="led"></span>Fable</button>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">The personas</h2>
+      <span class="section-note">01 / indie — 02 / rock — 03 / R&amp;B</span>
+    </div>
+    <div class="persona-cards">
+      <div class="persona-card" data-persona="blue">
+        <p class="name">Blue</p>
+        <p class="role">Indie</p>
+        <p class="desc">Restless, plainspoken songs — the project's baseline register.</p>
+      </div>
+      <div class="persona-card" data-persona="dawn">
+        <p class="name">Dawn</p>
+        <p class="role">Rock / darker material</p>
+        <p class="desc">Heavier, more corrosive — where the harder-edged songs live.</p>
+      </div>
+      <div class="persona-card" data-persona="fable">
+        <p class="name">Fable</p>
+        <p class="role">R&amp;B</p>
+        <p class="desc">Slower, groove-first, built for longing and patience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Latest songs</h2>
+      <span class="section-note"><a href="songs.html" style="color:var(--blue); text-decoration:none;">view all →</a></span>
+    </div>
+    <div class="grid" id="home-songs-grid"></div>
+    <div class="empty-state" style="display:none;">No songs under this persona yet.</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">From the blog</h2>
+      <span class="section-note"><a href="blog.html" style="color:var(--blue); text-decoration:none;">view all →</a></span>
+    </div>
+    <div id="home-posts-list"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>Blue Computer — built and written by KaArie</span>
+    <span>Songs · Tutorials · Blog</span>
+  </div>
+</footer>
+
+<script src="content.js"></script>
+<script>
+  function songCard(song) {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.dataset.persona = song.persona;
+    div.innerHTML = `
+      <span class="card-persona"><span class="led"></span>${song.persona}</span>
+      <div class="media-frame">
+        <iframe src="https://www.youtube.com/embed/${song.youtubeId}" title="${song.title}" allowfullscreen></iframe>
+      </div>
+      <h3>${song.title}</h3>
+      <p>${song.blurb}</p>
+    `;
+    return div;
+  }
+
+  function postRow(post) {
+    const a = document.createElement("a");
+    a.className = "post-row";
+    a.href = `blog.html#${post.slug}`;
+    a.innerHTML = `
+      <div>
+        <h3>${post.title}</h3>
+        <p>${post.excerpt}</p>
+      </div>
+      <span class="post-meta">${post.date}</span>
+    `;
+    return a;
+  }
+
+  const songsGrid = document.getElementById("home-songs-grid");
+  SONGS.slice(0, 3).forEach((s) => songsGrid.appendChild(songCard(s)));
+
+  const postsList = document.getElementById("home-posts-list");
+  POSTS.slice(0, 3).forEach((p) => postsList.appendChild(postRow(p)));
+
+  initPersonaFilter(document.getElementById("home-persona-select"), songsGrid);
+</script>
+
+</body>
+</html>

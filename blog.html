@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Blue Computer</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand"><span class="dot"></span>BLUE COMPUTER</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="songs.html">Songs</a>
+      <a href="tutorials.html">Tutorials</a>
+      <a href="blog.html" class="active">Blog</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" style="padding-bottom: 48px;">
+  <div class="wrap">
+    <p class="eyebrow">// writing</p>
+    <h1 class="display">Blog</h1>
+    <p class="lede">Notes on songs, process, and the project itself.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="note-box">
+      <strong>Setup note:</strong> to add a post, add an entry to the <code>POSTS</code> array at the top of <code>content.js</code> — title, date, excerpt, a unique <code>slug</code>, and the <code>body</code> as HTML. It'll appear here automatically, newest first.
+    </div>
+    <div id="post-list"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>Blue Computer — built and written by KaArie</span>
+    <span>Songs · Tutorials · Blog</span>
+  </div>
+</footer>
+
+<script src="content.js"></script>
+<script>
+  function postBlock(post) {
+    const article = document.createElement("article");
+    article.id = post.slug;
+    article.className = "card";
+    article.style.marginBottom = "20px";
+    article.innerHTML = `
+      <span class="tag-line">${post.date}</span>
+      <h3 style="margin-top:8px;">${post.title}</h3>
+      <p>${post.body}</p>
+    `;
+    return article;
+  }
+
+  const list = document.getElementById("post-list");
+  const sorted = [...POSTS].sort((a, b) => new Date(b.date) - new Date(a.date));
+  sorted.forEach((p) => list.appendChild(postBlock(p)));
+</script>
+
+</body>
+</html>

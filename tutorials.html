@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutorials — Blue Computer</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand"><span class="dot"></span>BLUE COMPUTER</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="songs.html">Songs</a>
+      <a href="tutorials.html" class="active">Tutorials</a>
+      <a href="blog.html">Blog</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" style="padding-bottom: 48px;">
+  <div class="wrap">
+    <p class="eyebrow">// how it's made</p>
+    <h1 class="display">Tutorials</h1>
+    <p class="lede">Short walkthroughs on the tools and process behind Blue Computer — lyric videos, prompting, and production.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="note-box">
+      <strong>Setup note:</strong> replace each <code>youtubeId</code> in <code>content.js</code> with the real video ID to activate these embeds.
+    </div>
+    <div class="grid" id="tutorials-grid"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>Blue Computer — built and written by KaArie</span>
+    <span>Songs · Tutorials · Blog</span>
+  </div>
+</footer>
+
+<script src="content.js"></script>
+<script>
+  function tutorialCard(t) {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.dataset.persona = "tutorial";
+    div.innerHTML = `
+      <span class="card-persona"><span class="led"></span>tutorial</span>
+      <div class="media-frame">
+        <iframe src="https://www.youtube.com/embed/${t.youtubeId}" title="${t.title}" allowfullscreen></iframe>
+      </div>
+      <h3>${t.title}</h3>
+      <p>${t.blurb}</p>
+    `;
+    return div;
+  }
+
+  const grid = document.getElementById("tutorials-grid");
+  TUTORIALS.forEach((t) => grid.appendChild(tutorialCard(t)));
+</script>
+
+</body>
+</html>

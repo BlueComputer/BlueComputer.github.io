@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Songs — Blue Computer</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand"><span class="dot"></span>BLUE COMPUTER</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="songs.html" class="active">Songs</a>
+      <a href="tutorials.html">Tutorials</a>
+      <a href="blog.html">Blog</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" style="padding-bottom: 48px;">
+  <div class="wrap">
+    <p class="eyebrow">// the catalog</p>
+    <h1 class="display">Songs</h1>
+    <p class="lede">Every release, filterable by persona.</p>
+    <div class="persona-select" id="songs-persona-select">
+      <button class="persona-btn is-active" data-persona="all"><span class="led"></span>All</button>
+      <button class="persona-btn" data-persona="blue"><span class="led"></span>Blue</button>
+      <button class="persona-btn" data-persona="dawn"><span class="led"></span>Dawn</button>
+      <button class="persona-btn" data-persona="fable"><span class="led"></span>Fable</button>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="note-box">
+      <strong>Setup note:</strong> each card embeds a YouTube video by ID. Open <code>content.js</code> and replace each song's <code>youtubeId</code> with the real video ID from its YouTube URL (the part after <code>watch?v=</code>).
+    </div>
+    <div class="grid" id="songs-grid"></div>
+    <div class="empty-state" style="display:none;">No songs under this persona yet.</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>Blue Computer — built and written by KaArie</span>
+    <span>Songs · Tutorials · Blog</span>
+  </div>
+</footer>
+
+<script src="content.js"></script>
+<script>
+  function songCard(song) {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.dataset.persona = song.persona;
+    div.innerHTML = `
+      <span class="card-persona"><span class="led"></span>${song.persona}</span>
+      <div class="media-frame">
+        <iframe src="https://www.youtube.com/embed/${song.youtubeId}" title="${song.title}" allowfullscreen></iframe>
+      </div>
+      <h3>${song.title}</h3>
+      <p>${song.blurb}</p>
+    `;
+    return div;
+  }
+
+  const songsGrid = document.getElementById("songs-grid");
+  SONGS.forEach((s) => songsGrid.appendChild(songCard(s)));
+
+  initPersonaFilter(document.getElementById("songs-persona-select"), songsGrid);
+</script>
+
+</body>
+</html>
