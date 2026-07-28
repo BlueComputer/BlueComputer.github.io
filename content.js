@@ -19,19 +19,19 @@ const SONGS = [
   },
   {
     title: "DEMISE",
-    persona: "dawn",
+    persona: "Dawn/Blue Mix",
     blurb: "Dawn's darker rock register — heavier, more corrosive material.",
-    youtubeId: "REPLACE_WITH_YOUTUBE_ID"
+    youtubeId: "dQw4w9WgXcQ"
   },
   {
     title: "Waiting Line",
-    persona: "fable",
-    blurb: "Fable's R&B side — patience, longing, and a slow-burn groove.",
+    persona: "None",
+    blurb: "Hauntingly cinematic vibe.",
     youtubeId: "REPLACE_WITH_YOUTUBE_ID"
   },
   {
     title: "Lazy",
-    persona: "blue",
+    persona: "Fable",
     blurb: "The newest release — laid-back and unhurried, true to its name.",
     youtubeId: "REPLACE_WITH_YOUTUBE_ID"
   }
